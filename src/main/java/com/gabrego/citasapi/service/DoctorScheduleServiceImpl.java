@@ -19,6 +19,11 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
     }
 
     @Override
+    public List<DoctorSchedule> findByDoctorId(int id) {
+        return doctorScheduleDAO.findByDoctorId(id);
+    }
+
+    @Override
     public DoctorSchedule findById(int id) {
         return doctorScheduleDAO.findById(id);
     }

@@ -7,6 +7,8 @@ import java.util.List;
 public interface DoctorScheduleDAO {
     public List<DoctorSchedule> findAll();
 
+    public  List<DoctorSchedule> findByDoctorId(int id);
+
     public DoctorSchedule findById(int id);
 
     public void save(DoctorSchedule doctorSchedule);

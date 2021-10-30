@@ -33,6 +33,10 @@ public class Doctor {
     private String num_reg_doc;
 
     @ManyToOne
+    @JoinColumn(name = "clinic_id")
+    private Clinic clinic_id;
+
+    @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
@@ -47,13 +51,14 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(int id, User user_id, String speciality, Identification identification_id, String num_id, String num_reg_doc, Status status) {
+    public Doctor(int id, User user_id, String speciality, Identification identification_id, String num_id, String num_reg_doc, Clinic clinic_id, Status status) {
         this.id = id;
         this.user_id = user_id;
         this.speciality = speciality;
         this.identification_id = identification_id;
         this.num_id = num_id;
         this.num_reg_doc = num_reg_doc;
+        this.clinic_id = clinic_id;
         this.status = status;
     }
 
@@ -105,6 +110,13 @@ public class Doctor {
         this.num_reg_doc = num_reg_doc;
     }
 
+    public Clinic getClinic_id() {
+        return clinic_id;
+    }
+
+    public void setClinic_id(Clinic clinic_id) {
+        this.clinic_id = clinic_id;
+    }
 
     public Status getStatus() {
         return status;
@@ -132,17 +144,17 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "{" + '\'' +
-                "id=" + id + '\'' +
-                ", user_id='" + user_id + '\'' +
-                ", status='" + status + '\'' +
-                ", speciality=" + speciality + '\'' +
-                ", identification=" + identification_id + '\'' +
-                ", num_id=" + num_id + '\'' +
-                ", num_reg_doc=" + num_reg_doc + '\'' +
-                ", status=" + status + '\'' +
-                ", created_at='" + created_at + '\'' +
-                ", updatedAt=" + updated_at + '\'' +
+        return "Doctor{" +
+                "id=" + id +
+                ", user_id=" + user_id +
+                ", speciality='" + speciality + '\'' +
+                ", identification_id=" + identification_id +
+                ", num_id='" + num_id + '\'' +
+                ", num_reg_doc='" + num_reg_doc + '\'' +
+                ", clinic_id=" + clinic_id +
+                ", status=" + status +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
                 '}';
     }
 }

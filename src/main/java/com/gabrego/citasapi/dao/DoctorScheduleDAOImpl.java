@@ -27,6 +27,15 @@ public class DoctorScheduleDAOImpl implements DoctorScheduleDAO{
     }
 
     @Override
+    public List<DoctorSchedule> findByDoctorId(int id) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<DoctorSchedule> theQuery = currentSession.createQuery("FROM DoctorSchedule WHERE doctor_id.id=:idDoctor", DoctorSchedule.class);
+        theQuery.setParameter("idDoctor", id);
+        List<DoctorSchedule> doctorSchedules = theQuery.getResultList();
+        return doctorSchedules;
+    }
+
+    @Override
     public DoctorSchedule findById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
         DoctorSchedule doctorSchedule = currentSession.get(DoctorSchedule.class, id);

@@ -8,6 +8,8 @@ public interface DoctorScheduleService {
 
     public List<DoctorSchedule> findAll();
 
+    public List<DoctorSchedule> findByDoctorId(int id);
+
     public DoctorSchedule findById(int id);
 
     public void save(DoctorSchedule doctorSchedule);
