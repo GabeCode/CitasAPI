@@ -28,7 +28,7 @@ public class DoctorScheduleRestController {
 
     @GetMapping("/doctor/{doctorID}")
     public List<DoctorSchedule> findAllDoctorSchedules(@PathVariable int doctorID) {
-        return doctorScheduleService.findAll();
+        return doctorScheduleService.findByDoctorId(doctorID);
     }
 
     @GetMapping("/{scheduleId}")
