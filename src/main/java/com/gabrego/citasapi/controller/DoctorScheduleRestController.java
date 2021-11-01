@@ -2,12 +2,13 @@ package com.gabrego.citasapi.controller;
 
 import com.gabrego.citasapi.entity.Doctor;
 import com.gabrego.citasapi.entity.DoctorSchedule;
-import com.gabrego.citasapi.entity.User;
 import com.gabrego.citasapi.service.DoctorScheduleService;
+import com.gabrego.citasapi.service.DoctorService;
 import com.gabrego.citasapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.util.List;
 
 @RestController
@@ -20,6 +21,9 @@ public class DoctorScheduleRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DoctorService doctorService;
 
     @GetMapping("/")
     public List<DoctorSchedule> findAllDoctorSchedules() {
@@ -47,8 +51,8 @@ public class DoctorScheduleRestController {
     @PostMapping("/")
     public DoctorSchedule addDoctorSchedule(@RequestBody DoctorSchedule doctorSchedule) {
         doctorSchedule.setId(0);
-        User user = userService.findById(doctorSchedule.getDoctor_id().getId());
-        doctorSchedule.setDoctor_id(user);
+        Doctor doctor = doctorService.findById(doctorSchedule.getDoctor_id().getId());
+        doctorSchedule.setDoctor_id(doctor);
         //Este metodo guardará al usuario enviado
         doctorScheduleService.save(doctorSchedule);
 
@@ -59,8 +63,8 @@ public class DoctorScheduleRestController {
     @PutMapping("/")
     public DoctorSchedule updateDoctorSchedule(@RequestBody DoctorSchedule doctorSchedule) {
         System.out.println(doctorSchedule);
-        User user = userService.findById(doctorSchedule.getDoctor_id().getId());
-        doctorSchedule.setDoctor_id(user);
+        Doctor doctor = doctorService.findById(doctorSchedule.getDoctor_id().getId());
+        doctorSchedule.setDoctor_id(doctor);
         //Este metodo guardará al usuario enviado
         doctorScheduleService.save(doctorSchedule);
         return doctorSchedule;

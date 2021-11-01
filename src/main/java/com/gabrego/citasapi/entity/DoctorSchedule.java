@@ -1,6 +1,7 @@
 package com.gabrego.citasapi.entity;
 
 import javax.persistence.*;
+import javax.print.Doc;
 import java.sql.Time;
 
 @Entity
@@ -14,7 +15,7 @@ public class DoctorSchedule {
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
-    private User doctor_id;
+    private Doctor doctor_id;
 
     @Column(name = "start_time")
     private Time start_time;
@@ -32,7 +33,7 @@ public class DoctorSchedule {
     public DoctorSchedule() {
     }
 
-    public DoctorSchedule(int id, User doctor_id, Time start_time, Time finish_time, Day day_id, int rango_cita) {
+    public DoctorSchedule(int id, Doctor doctor_id, Time start_time, Time finish_time, Day day_id, int rango_cita) {
         this.id = id;
         this.doctor_id = doctor_id;
         this.start_time = start_time;
@@ -49,11 +50,11 @@ public class DoctorSchedule {
         this.id = id;
     }
 
-    public User getDoctor_id() {
+    public Doctor getDoctor_id() {
         return doctor_id;
     }
 
-    public void setDoctor_id(User doctor_id) {
+    public void setDoctor_id(Doctor doctor_id) {
         this.doctor_id = doctor_id;
     }
 
