@@ -1,5 +1,6 @@
 package com.gabrego.citasapi.dao;
 
+import com.gabrego.citasapi.entity.Days;
 import com.gabrego.citasapi.entity.Doctor;
 import com.gabrego.citasapi.entity.DoctorSchedule;
 import com.gabrego.citasapi.entity.DoctorSchedule;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Repository
@@ -39,9 +41,40 @@ public class DoctorScheduleDAOImpl implements DoctorScheduleDAO{
     @Override
     public List<DoctorSchedule> findAvailabilityByDoctorAndDate(int id, Date date) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<DoctorSchedule> theQuery = currentSession.createQuery("FROM DoctorSchedule AS ds WHERE ds.doctor_id.id=:idDoctor AND " +
-                "NOT EXISTS (FROM Appointment as a WHERE a.doctor_schedule_id.id=ds.id AND a.appointment_date=:aDate)", DoctorSchedule.class);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dayWeek=0;
+        Query<DoctorSchedule> theQuery = currentSession.createQuery("FROM DoctorSchedule AS ds WHERE ds.doctor_id.id=:idDoctor " +
+                " AND ds.day_id.id=:idDay AND " +
+                "NOT EXISTS (FROM Appointment as a WHERE a.doctor_schedule_id.id=ds.id AND a.appointment_date=:aDate AND a.status.id=1)", DoctorSchedule.class);
         theQuery.setParameter("idDoctor", id);
+
+        switch (calendar.get(Calendar.DAY_OF_WEEK)){
+            case 0:
+                dayWeek = Days.SUNDAY.getDayId();
+                break;
+            case 1:
+                dayWeek = Days.MONDAY.getDayId();
+                break;
+            case 2:
+                dayWeek = Days.TUESDAY.getDayId();
+                break;
+            case 3:
+                dayWeek = Days.WEDNESDAY.getDayId();
+                break;
+            case 4:
+                dayWeek = Days.THURSDAY.getDayId();
+                break;
+            case 5:
+                dayWeek = Days.FRIDAY.getDayId();
+                break;
+            case 6:
+                dayWeek = Days.SATURDAY.getDayId();
+                break;
+            default:
+                break;
+        }
+        theQuery.setParameter("idDay", dayWeek);
         theQuery.setParameter("aDate", date);
         return theQuery.getResultList();
     }
