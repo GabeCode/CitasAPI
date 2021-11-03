@@ -22,7 +22,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
-    private User doctor_id;
+    private Doctor doctor_id;
 
     @ManyToOne
     @JoinColumn(name = "doctor_schedule_id", referencedColumnName = "id")
@@ -32,7 +32,7 @@ public class Appointment {
     private String justification;
 
     @Column(name = "appointment_date")
-    private Date appointment_date;
+    private java.sql.Date appointment_date;
 
     @Column(name = "appointment_time")
     private Time appointment_time;
@@ -52,7 +52,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(int id, User patient_id, User doctor_id, DoctorSchedule doctor_schedule_id, String justification, Date appointment_date, Time appointment_time, Status status) {
+    public Appointment(int id, User patient_id, Doctor doctor_id, DoctorSchedule doctor_schedule_id, String justification, java.sql.Date appointment_date, Time appointment_time, Status status) {
         this.id = id;
         this.patient_id = patient_id;
         this.doctor_id = doctor_id;
@@ -79,11 +79,11 @@ public class Appointment {
         this.patient_id = patient_id;
     }
 
-    public User getDoctor_id() {
+    public Doctor getDoctor_id() {
         return doctor_id;
     }
 
-    public void setDoctor_id(User doctor_id) {
+    public void setDoctor_id(Doctor doctor_id) {
         this.doctor_id = doctor_id;
     }
 
@@ -107,7 +107,7 @@ public class Appointment {
         return appointment_date;
     }
 
-    public void setAppointment_date(Date appointment_date) {
+    public void setAppointment_date(java.sql.Date appointment_date) {
         this.appointment_date = appointment_date;
     }
 

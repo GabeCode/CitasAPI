@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.Doc;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,11 @@ public class DoctorScheduleRestController {
     @GetMapping("/")
     public List<DoctorSchedule> findAllDoctorSchedules() {
         return doctorScheduleService.findAll();
+    }
+
+    @GetMapping("/availability/{doctorId}/{aDate}")
+    public List<DoctorSchedule> findAvailabilityByDoctorAndDate(@PathVariable int doctorId, @PathVariable Date aDate) {
+        return doctorScheduleService.findAvailabilityByDoctorAndDate(doctorId, aDate);
     }
 
     @GetMapping("/doctor/{doctorID}")

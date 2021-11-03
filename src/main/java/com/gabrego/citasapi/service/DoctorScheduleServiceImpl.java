@@ -5,6 +5,7 @@ import com.gabrego.citasapi.entity.DoctorSchedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -21,6 +22,11 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
     @Override
     public List<DoctorSchedule> findByDoctorId(int id) {
         return doctorScheduleDAO.findByDoctorId(id);
+    }
+
+    @Override
+    public List<DoctorSchedule> findAvailabilityByDoctorAndDate(int id, Date date) {
+        return doctorScheduleDAO.findAvailabilityByDoctorAndDate(id, date);
     }
 
     @Override
