@@ -13,7 +13,7 @@ import java.util.List;
 //Indiciamos que es un controlador rest
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
-@RequestMapping("/clinic") //esta sera la raiz de la url, es decir http://127.0.0.1:8080/usersapi/
+@RequestMapping("/appointment/clinic") //esta sera la raiz de la url, es decir http://127.0.0.1:8080/usersapi/
 public class ClinicRestController {
 
     @Autowired
