@@ -50,25 +50,25 @@ public class DoctorScheduleDAOImpl implements DoctorScheduleDAO{
         theQuery.setParameter("idDoctor", id);
 
         switch (calendar.get(Calendar.DAY_OF_WEEK)){
-            case 0:
+            case 1:
                 dayWeek = Days.SUNDAY.getDayId();
                 break;
-            case 1:
+            case 2:
                 dayWeek = Days.MONDAY.getDayId();
                 break;
-            case 2:
+            case 3:
                 dayWeek = Days.TUESDAY.getDayId();
                 break;
-            case 3:
+            case 4:
                 dayWeek = Days.WEDNESDAY.getDayId();
                 break;
-            case 4:
+            case 5:
                 dayWeek = Days.THURSDAY.getDayId();
                 break;
-            case 5:
+            case 6:
                 dayWeek = Days.FRIDAY.getDayId();
                 break;
-            case 6:
+            case 7:
                 dayWeek = Days.SATURDAY.getDayId();
                 break;
             default:
