@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Repository
@@ -38,6 +40,18 @@ public class AppointmentDAOImpl implements AppointmentDAO{
         Session currentSession = entityManager.unwrap(Session.class);
         Appointment appointment = currentSession.get(Appointment.class, id);
         return appointment;
+    }
+
+    @Override
+    public Appointment checkIfExistTimeAndDate(int idDoctor, Date aDate, Time timeStart, Time timeFinish) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<Appointment> theQuery = currentSession.createQuery("FROM Appointment WHERE doctor_id.id=:doctorId AND appointment_date=:dateA AND " +
+                "appointment_time=:sTime AND appointment_time_finish=:fTime", Appointment.class);
+        theQuery.setParameter("doctorId", idDoctor);
+        theQuery.setParameter("dateA", aDate);
+        theQuery.setParameter("sTime", timeStart);
+        theQuery.setParameter("fTime", timeFinish);
+        return theQuery.uniqueResult();
     }
 
 

@@ -5,6 +5,8 @@ import com.gabrego.citasapi.entity.Appointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Service
@@ -26,6 +28,11 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Override
     public Appointment findById(int id) {
         return appointmentDAO.findById(id);
+    }
+
+    @Override
+    public Appointment checkIfExistTimeAndDate(int idDoctor, Date aDate, Time timeStart, Time timeFinish) {
+        return appointmentDAO.checkIfExistTimeAndDate(idDoctor, aDate, timeStart, timeFinish);
     }
 
     @Override

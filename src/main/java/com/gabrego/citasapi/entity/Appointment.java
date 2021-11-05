@@ -37,6 +37,9 @@ public class Appointment {
     @Column(name = "appointment_time")
     private Time appointment_time;
 
+    @Column(name = "appointment_time_finish")
+    private Time appointment_time_finish;
+
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
@@ -52,7 +55,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(int id, User patient_id, Doctor doctor_id, DoctorSchedule doctor_schedule_id, String justification, java.sql.Date appointment_date, Time appointment_time, Status status) {
+    public Appointment(int id, User patient_id, Doctor doctor_id, DoctorSchedule doctor_schedule_id, String justification, java.sql.Date appointment_date, Time appointment_time, Time appointment_time_finish, Status status) {
         this.id = id;
         this.patient_id = patient_id;
         this.doctor_id = doctor_id;
@@ -60,6 +63,7 @@ public class Appointment {
         this.justification = justification;
         this.appointment_date = appointment_date;
         this.appointment_time = appointment_time;
+        this.appointment_time_finish = appointment_time_finish;
         this.status = status;
     }
 
@@ -119,6 +123,14 @@ public class Appointment {
         this.appointment_time = appointment_time;
     }
 
+    public Time getAppointment_time_finish() {
+        return appointment_time_finish;
+    }
+
+    public void setAppointment_time_finish(Time appointment_time_finish) {
+        this.appointment_time_finish = appointment_time_finish;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -153,6 +165,7 @@ public class Appointment {
                 ", justification='" + justification + '\'' +
                 ", appointment_date=" + appointment_date +
                 ", appointment_time=" + appointment_time +
+                ", appointment_time_finish=" + appointment_time_finish +
                 ", status=" + status +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +

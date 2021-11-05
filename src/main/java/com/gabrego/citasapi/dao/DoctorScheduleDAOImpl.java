@@ -45,8 +45,7 @@ public class DoctorScheduleDAOImpl implements DoctorScheduleDAO{
         calendar.setTime(date);
         int dayWeek=0;
         Query<DoctorSchedule> theQuery = currentSession.createQuery("FROM DoctorSchedule AS ds WHERE ds.doctor_id.id=:idDoctor " +
-                " AND ds.day_id.id=:idDay AND " +
-                "NOT EXISTS (FROM Appointment as a WHERE a.doctor_schedule_id.id=ds.id AND a.appointment_date=:aDate AND a.status.id=1)", DoctorSchedule.class);
+                " AND ds.day_id.id=:idDay", DoctorSchedule.class);
         theQuery.setParameter("idDoctor", id);
 
         switch (calendar.get(Calendar.DAY_OF_WEEK)){
@@ -75,7 +74,6 @@ public class DoctorScheduleDAOImpl implements DoctorScheduleDAO{
                 break;
         }
         theQuery.setParameter("idDay", dayWeek);
-        theQuery.setParameter("aDate", date);
         return theQuery.getResultList();
     }
 
