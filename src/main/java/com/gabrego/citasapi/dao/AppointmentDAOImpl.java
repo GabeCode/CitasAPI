@@ -46,7 +46,7 @@ public class AppointmentDAOImpl implements AppointmentDAO{
     public Appointment checkIfExistTimeAndDate(int idDoctor, Date aDate, Time timeStart, Time timeFinish) {
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Appointment> theQuery = currentSession.createQuery("FROM Appointment WHERE doctor_id.id=:doctorId AND appointment_date=:dateA AND " +
-                "appointment_time=:sTime AND appointment_time_finish=:fTime", Appointment.class);
+                "appointment_time=:sTime AND appointment_time_finish=:fTime AND status.id=1", Appointment.class);
         theQuery.setParameter("doctorId", idDoctor);
         theQuery.setParameter("dateA", aDate);
         theQuery.setParameter("sTime", timeStart);
