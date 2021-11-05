@@ -29,7 +29,7 @@ public class AppointmentRestController {
     }
 
     @GetMapping("/check/{doctorId}/{aDate}/{timeStart}/{timeFinish}")
-    public Appointment getAppointmentById(@PathVariable int doctorId, Date aDate, Time timeStart, Time timeFinish){
+    public Appointment getAppointmentById(@PathVariable int doctorId, @PathVariable Date aDate, @PathVariable Time timeStart, @PathVariable Time timeFinish){
         Appointment appointment = appointmentService.checkIfExistTimeAndDate(doctorId, aDate, timeStart, timeFinish);
 
         if(appointment == null) {
