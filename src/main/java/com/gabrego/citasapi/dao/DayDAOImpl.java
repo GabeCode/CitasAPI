@@ -2,6 +2,7 @@ package com.gabrego.citasapi.dao;
 
 import com.gabrego.citasapi.entity.Day;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,7 +36,9 @@ public class DayDAOImpl implements DayDAO{
     @Override
     public void save(Day day) {
         Session currentSession = entityManager.unwrap(Session.class);
+        Transaction transaction = currentSession.beginTransaction();
         currentSession.saveOrUpdate(day);
+        transaction.commit();
     }
 
     @Transactional

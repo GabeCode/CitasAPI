@@ -2,6 +2,7 @@ package com.gabrego.citasapi.dao;
 
 import com.gabrego.citasapi.entity.Doctor;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,7 +43,9 @@ public class DoctorDAOImpl implements DoctorDAO {
     @Override
     public void save(Doctor doctor) {
         Session currentSession = entityManager.unwrap(Session.class);
+        Transaction transaction = currentSession.beginTransaction();
         currentSession.saveOrUpdate(doctor);
+        transaction.commit();
     }
 
     @Transactional

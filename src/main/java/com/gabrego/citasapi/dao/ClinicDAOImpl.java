@@ -2,6 +2,7 @@ package com.gabrego.citasapi.dao;
 
 import com.gabrego.citasapi.entity.Clinic;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,7 +43,9 @@ public class ClinicDAOImpl implements ClinicDAO{
     @Override
     public void save(Clinic clinic) {
         Session currentSession = entityManager.unwrap(Session.class);
+        Transaction transaction = currentSession.beginTransaction();
         currentSession.saveOrUpdate(clinic);
+        transaction.commit();
     }
 
     @Transactional

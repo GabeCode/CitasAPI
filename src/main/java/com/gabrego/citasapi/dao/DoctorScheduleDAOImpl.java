@@ -5,6 +5,7 @@ import com.gabrego.citasapi.entity.Doctor;
 import com.gabrego.citasapi.entity.DoctorSchedule;
 import com.gabrego.citasapi.entity.DoctorSchedule;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -88,7 +89,9 @@ public class DoctorScheduleDAOImpl implements DoctorScheduleDAO{
     @Override
     public void save(DoctorSchedule doctorSchedule) {
         Session currentSession = entityManager.unwrap(Session.class);
+        Transaction transaction = currentSession.beginTransaction();
         currentSession.saveOrUpdate(doctorSchedule);
+        transaction.commit();
     }
 
     @Transactional

@@ -2,11 +2,13 @@ package com.gabrego.citasapi.dao;
 
 import com.gabrego.citasapi.entity.MedicalRecord;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -41,21 +43,25 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
     @Override
     public void save(MedicalRecord medicalRecord) {
         Session currentSession = entityManager.unwrap(Session.class);
+        Transaction transaction = currentSession.beginTransaction();
         currentSession.saveOrUpdate(medicalRecord);
+        transaction.commit();
     }
 
+    @Transactional
     @Override
     public int deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<MedicalRecord> theQuery = currentSession.createQuery("DELETE FROM MedicalRecord WHERE id=:idRecord", MedicalRecord.class);
+        Query<MedicalRecord> theQuery = currentSession.createQuery("DELETE FROM MedicalRecord WHERE id=:idRecord");
         theQuery.setParameter("idRecord", id);
         return theQuery.executeUpdate();
     }
 
+    @Transactional
     @Override
     public int deleteByUserId(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<MedicalRecord> theQuery = currentSession.createQuery("DELETE FROM MedicalRecord WHERE user_id.id=:idUser", MedicalRecord.class);
+        Query<MedicalRecord> theQuery = currentSession.createQuery("DELETE FROM MedicalRecord WHERE user_id.id=:idUser");
         theQuery.setParameter("idUser", id);
         return theQuery.executeUpdate();
     }
