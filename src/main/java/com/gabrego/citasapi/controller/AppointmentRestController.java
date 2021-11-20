@@ -85,7 +85,7 @@ public class AppointmentRestController {
         Appointment appointment = appointmentService.findById(appointmentId);
 
         if(appointment == null) {
-            new Appointment();
+            return 0;
         }
 
         return appointmentService.deleteById(appointmentId);

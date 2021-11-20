@@ -72,7 +72,7 @@ public class ClinicRestController {
         Clinic clinic = clinicService.findById(clinicId);
 
         if(clinic == null) {
-            new Clinic();
+            return 0;
         }
 
         return clinicService.deleteById(clinicId);
