@@ -19,6 +19,11 @@ public class ClinicScheduleServiceImpl implements ClinicScheduleService {
     }
 
     @Override
+    public List<ClinicSchedule> findAllByClinicId(int id) {
+        return clinicScheduleDAO.findAllByClinicId(id);
+    }
+
+    @Override
     public ClinicSchedule findById(int id) {
         return clinicScheduleDAO.findById(id);
     }

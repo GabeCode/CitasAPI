@@ -8,6 +8,8 @@ import java.util.List;
 public interface ClinicScheduleDAO {
     public List<ClinicSchedule> findAll();
 
+    public List<ClinicSchedule> findAllByClinicId(int id);
+
     public ClinicSchedule findById(int id);
 
     public void save(ClinicSchedule clinicSchedule);
